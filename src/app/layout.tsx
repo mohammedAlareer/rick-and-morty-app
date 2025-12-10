@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
+import QueryProvider from "./providers/QueryProvider";
 
 
 export const metadata: Metadata = {
@@ -16,11 +17,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-slate-800">
+      <body className="bg-slate-900">
+      <QueryProvider>
       <Navbar/>
       <main className="">
         {children}
         </main>
+        </QueryProvider>
         </body>
     </html>
   );

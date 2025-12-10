@@ -110,6 +110,22 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+@layer utilities {
+  @keyframes bounceOnce {
+   0% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(-5px);
+    }
+  }
+
+  .animate-bounceOnce {
+    animation: bounceOnce 0.5s forwards;
+  }
+}
+
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
