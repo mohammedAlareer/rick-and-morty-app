@@ -9,7 +9,8 @@ interface Props {
 
 export default function Error({message} : Props) {
   return (
-    <div className="flex flex-col items-center justify-center py-40 animate-fade-in">
+    <div>
+    <div className="flex flex-col items-center justify-center animate-fade-in">
       <div className="relative">
         <div className="absolute inset-0 bg-red-800 rounded-full blur-xl animate-pulse" />
         <div className="relative  rounded-full p-6 border border-red-500/30">
@@ -24,6 +25,7 @@ export default function Error({message} : Props) {
       <p className="text-center max-w-md mt-2 text-white">
         {message}
       </p>
+      </div>
       </div>
   )
 }
