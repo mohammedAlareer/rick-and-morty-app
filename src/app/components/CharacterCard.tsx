@@ -3,12 +3,12 @@ import { characterType } from "@/types/character"
 import Image from "next/image"
 import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
-import { MapPin } from "lucide-react"
+import { ArrowRight, MapPin } from "lucide-react"
 
 export default function CharacterCard({character} : {character: characterType}) {
   return (
     <Link href={`/character/${character.id}`} className="">
-      <Card className="pt-0 overflow-hidden group bg-gray-900 gap-2">
+      <Card className="pt-0 overflow-hidden group bg-gray-900 gap-2 w-full h-[450]">
         {character.image && (
           <div className="relative w-80 h-72">
             <Image
@@ -35,6 +35,11 @@ export default function CharacterCard({character} : {character: characterType}) 
             <MapPin className=" text-red-500 w-4 h-4"/>
             <p className="text-gray-400 text-xs">{character.location.name}</p>
           </div>
+          <div className="flex gap-1 text-white justify-end mt-4 group items-center ">
+          <span className="text-[14px]  rounded-full bg-red-600 px-2 py-1">View Details</span>
+        <ArrowRight className="text-green-500 group-hover:mr-2 transition-all duration-300 ease-in-out"/>
+        </div>
+
         </CardContent>
       </Card>
     </Link>

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import MaxWidthWrapper from './MaxWidthWrapper'
 import { useQuery } from '@tanstack/react-query';
 import { createCharactersQueryOptions } from '@/api/rickAndMortyAPI';
@@ -16,8 +16,7 @@ export default function CharechatersList( ) {
   const [searchInput,setSearchInput]=useState("");
   const [isFoucsed,setIsFoucsed] = useState(false);
   const [debouncedValue,setDebouncedValue] = useState(searchInput)
-  const [localValue,setLocalValue] = useState(searchInput)
-
+  const inputRef  =useRef<HTMLInputElement>(null)
 useEffect(() => {
   const timer = setTimeout(() => {
     setDebouncedValue(searchInput)
@@ -31,8 +30,11 @@ const filteredCharacters = data?.results.filter((character:characterType) => cha
 if (isLoading) return <Loading/>
 
 
-  const handleClear = () => {
-
+  const handleClearInput = () => {
+    setSearchInput('');
+    setDebouncedValue('');
+    
+    inputRef.current?.focus();
   }
 
   return (
@@ -49,9 +51,10 @@ if (isLoading) return <Loading/>
                 onFocus={() => setIsFoucsed(true)}
                 onBlur={() => setIsFoucsed(false)}
                 onChange={(e) => setSearchInput(e.target.value)}
+                ref={inputRef}
                 className='w-full mt-10 rounded px-12 py-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-600 text-white/90'/>
                 <Search className='absolute left-5 top-14 text-gray-400 w-5 h-5' />
-                <X className='absolute size-4 right-3 top-14'/>
+                 {searchInput ? <X className='absolute size-4 right-3 top-14 text-white' onClick={handleClearInput}/> : ''}
             </div>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-16'>
               {filteredCharacters?.map((character : characterType) => {
